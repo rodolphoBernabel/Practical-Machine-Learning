@@ -1,0 +1,73 @@
+---
+title: "Prediction Assignment"
+author: "Rodolpho Talaisys Bernabel"
+date: "July 12, 2016"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Data Wrangling
+
+```{r, warning=FALSE, message=FALSE}
+rm(list=ls())
+
+library(plyr)
+library(caret)
+
+setwd("C:/Users/Rodolpho/Downloads")
+
+set.seed(1)
+
+training <- read.csv("pml-training.csv", header=T)
+testing <- read.csv("pml-testing.csv",header=T)
+testing <- subset(testing, select = - X)
+testing <- subset(testing, select = - user_name)
+testing <- subset(testing, select = - problem_id)
+testing <- testing[ , ! apply( testing , 2 , function(x) all(is.na(x)) ) ]
+classe <- training$classe
+training <- cbind(classe, training[,names(testing)])
+```
+
+## Partitioning the data
+
+```{r}
+inTrain <- createDataPartition(y=training$classe,p=.7,list=F)
+trainSet <- training[inTrain,]
+validationSet <- training[-inTrain,]
+dim(trainSet)
+dim(validationSet)
+```
+
+## Fitting the Linear Discriminant Analysis Model
+
+Note that the explanatory variables included in the model were selected in the data munging.
+
+```{r, warning=FALSE, message=FALSE}
+modlda <- train(classe~.,data=trainSet,method="lda")
+```
+
+## Checking the Accuracy
+
+```{r}
+modlda
+```
+
+## Validating the Model
+
+```{r}
+plda <- predict(modlda,validationSet)
+table(plda,validationSet$classe)
+validationSet$predright <- plda==validationSet$classe
+summary(validationSet$predright)
+```
+
+## Predicting the Test Cases
+
+```{r}
+predict(modlda,testing)
+```
+
+
