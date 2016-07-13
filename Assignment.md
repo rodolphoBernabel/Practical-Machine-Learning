@@ -100,12 +100,18 @@ summary(validationSet$predright)
     ##    Mode   FALSE    TRUE    NA's 
     ## logical     822    5063       0
 
+Error Rate in the Validation Set
+--------------------------------
+
+``` r
+1 - (5000/5885)
+```
+
+    ## [1] 0.1503823
+
+The error rate was consistent with the accuracy found. Therefore, I expect an accuracy of little less than 0.85 in the test set; and an error rate around 0.15.
+
 Predicting the Test Cases
 -------------------------
 
-``` r
-predict(modlda,testing)
-```
-
-    ##  [1] B B B A A E D C A A B C B A E E A B B B
-    ## Levels: A B C D E
+When checked with the quiz, the model yielded a 0.9 accuracy rate.

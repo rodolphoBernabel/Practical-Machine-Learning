@@ -88,10 +88,12 @@ validationSet &lt;-<span class="st"> </span>training[-inTrain,]
 <span class="kw">summary</span>(validationSet$predright)</code></pre></div>
 <pre><code>##    Mode   FALSE    TRUE    NA's 
 ## logical     822    5063       0</code></pre>
+<h2 id="error-rate-in-the-validation-set">Error Rate in the Validation Set</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span>(<span class="dv">5000</span>/<span class="dv">5885</span>)</code></pre></div>
+<pre><code>## [1] 0.1503823</code></pre>
+<p>The error rate was consistent with the accuracy found. Therefore, I expect an accuracy of little less than 0.85 in the test set; and an error rate around 0.15.</p>
 <h2 id="predicting-the-test-cases">Predicting the Test Cases</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(modlda,testing)</code></pre></div>
-<pre><code>##  [1] B B B A A E D C A A B C B A E E A B B B
-## Levels: A B C D E</code></pre>
+<p>When checked with the quiz, the model yielded a 0.9 accuracy rate.</p>
 
 </body>
 </html>

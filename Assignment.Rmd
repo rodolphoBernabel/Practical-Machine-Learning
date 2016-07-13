@@ -64,10 +64,13 @@ validationSet$predright <- plda==validationSet$classe
 summary(validationSet$predright)
 ```
 
-## Predicting the Test Cases
+##Error Rate in the Validation Set
 
 ```{r}
-predict(modlda,testing)
+1 - (5000/5885)
 ```
+The error rate was consistent with the accuracy found. Therefore, I expect an accuracy of little less than 0.85 in the test set; and an error rate around 0.15.
 
+## Predicting the Test Cases
 
+When checked with the quiz, the model yielded a 0.9 accuracy rate.
